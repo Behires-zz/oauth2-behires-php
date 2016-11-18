@@ -162,7 +162,7 @@ class BehiresTest extends \PHPUnit_Framework_TestCase
         $message = uniqid();
         $status = rand(400,600);
         $postResponse = m::mock('Psr\Http\Message\ResponseInterface');
-        $postResponse->shouldReceive('getBody')->andReturn('{"error_description": "'.$message.'","error": "invalid_request"}');
+        $postResponse->shouldReceive('getBody')->andReturn('{"errors": "'.$message.'","error": "invalid_request"}');
         $postResponse->shouldReceive('getHeader')->andReturn(['content-type' => 'json']);
         $postResponse->shouldReceive('getStatusCode')->andReturn($status);
         $client = m::mock('GuzzleHttp\ClientInterface');
