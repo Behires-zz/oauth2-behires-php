@@ -1,0 +1,31 @@
+{
+    "name": "behires/oauth2-behires-php",
+    "description": "The OAuth2-Client for Behires in PHP",
+    "keywords": ["behires", "php", "api", "sdk"],
+    "type": "library",
+    "require": {
+        "php": ">=5.5.0",
+        "league/oauth2-client": "~1.4"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~4.0"
+    },
+    "license": "GPL-3.0",
+    "authors": [
+        {
+            "name": "Frank Giger",
+            "email": "frank.giger@behires.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "autoload": {
+        "psr-4": {
+            "League\\OAuth2\\Client\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "League\\OAuth2\\Client\\Test\\": "tests/src/"
+        }
+    }
+}
