@@ -11,6 +11,8 @@ class Behires extends AbstractProvider
 {
     use BearerAuthorizationTrait;
 
+    private $dev = false;
+
     /**
      * Default scope
      *
@@ -35,6 +37,16 @@ class Behires extends AbstractProvider
     }
 
     /**
+     * Allow to use the dev api endpoint
+     *
+     * @return void
+     */
+    public function activateDevelopment()
+    {
+        $this->dev = true;
+    }
+
+    /**
      * Get the string used to separate scopes.
      *
      * @return string
@@ -53,7 +65,7 @@ class Behires extends AbstractProvider
      */
     public function getBaseAuthorizationUrl()
     {
-        return 'https://api.behires.com/oauth/authorize';
+        return $this->buildBaseUrl() . '/oauth/authorize';
     }
 
     /**
@@ -66,7 +78,7 @@ class Behires extends AbstractProvider
      */
     public function getBaseAccessTokenUrl(array $params)
     {
-        return 'https://api.behires.com/oauth/token';
+        return $this->buildBaseUrl() . '/oauth/token';
     }
 
     /**
@@ -77,7 +89,7 @@ class Behires extends AbstractProvider
      */
     public function getResourceOwnerDetailsUrl(AccessToken $token)
     {
-        return 'https://api.behires.com/v1/users/self';
+        return $this->buildBaseUrl() . '/v1/users/self';
     }
 
     /**
@@ -123,5 +135,19 @@ class Behires extends AbstractProvider
     protected function createResourceOwner(array $response, AccessToken $token)
     {
         // TODO: Implement createResourceOwner() method.
+    }
+
+    /**
+     * Build the base domain
+     *
+     * @return string
+     */
+    private function buildBaseUrl()
+    {
+        if($this->dev) {
+            return 'https://dev-api.behires.com';
+        }
+
+        return 'https://api.behires.com';
     }
 }
